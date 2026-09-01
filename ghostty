@@ -11,3 +11,6 @@ keybind = ctrl+alt+shift+j=text:\x0a
 keybind = ctrl+alt+shift+k=text:\x0b
 keybind = ctrl+alt+shift+l=text:\x0c
 keybind = ctrl+alt+shift+backslash=text:\x1c
+
+# option+u -> ESC u (M-u) for the tmux unread-tint toggle
+keybind = alt+u=text:\x1bu
