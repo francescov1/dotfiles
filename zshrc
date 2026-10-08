@@ -173,3 +173,4 @@ export PATH="$PATH:/Users/francesco/.nsccli/bin"
 
 # Pi
 export PATH="/Users/francesco/.asdf/installs/nodejs/24.9.0/bin:$PATH"
+
