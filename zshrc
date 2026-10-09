@@ -169,7 +169,7 @@ export PATH="$PATH:/Users/francesco/.nsccli/bin"
 
 
 # asdf version manager
-. "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ] && . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" || export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Pi
 export PATH="/Users/francesco/.asdf/installs/nodejs/24.9.0/bin:$PATH"

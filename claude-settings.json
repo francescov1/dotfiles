@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -33,7 +33,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -43,7 +43,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -61,7 +61,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -79,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -97,7 +97,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -117,7 +117,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -127,7 +127,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -145,7 +145,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/francesco/.office-bin/office.sh hook claude-code"
+            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }

@@ -1,8 +1,8 @@
 # Setup on new machine
 
 ```bash
-git clone https://github.com/francescov1/.dotfiles.git
-cd .dotfiles
+git clone https://github.com/francescov1/dotfiles.git
+cd dotfiles
 ./install
 ```
 
