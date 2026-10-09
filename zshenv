@@ -4,3 +4,6 @@
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# rustup appends this to ~/.zshenv; keep it here so the dotfiles link can own the file.
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

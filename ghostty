@@ -14,3 +14,7 @@ keybind = ctrl+alt+shift+backslash=text:\x1c
 
 # option+u -> ESC u (M-u) for the tmux unread-tint toggle
 keybind = alt+u=text:\x1bu
+
+# Copy Ghostty's terminfo to hosts on ssh; without it TERM=xterm-ghostty is unknown remotely and
+# zsh echoes garbled/doubled input and tmux won't attach.
+shell-integration-features = ssh-terminfo
