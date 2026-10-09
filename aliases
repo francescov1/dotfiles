@@ -27,6 +27,10 @@ alias br="bun run"
 alias ta="tmux a"
 alias tn="tmux new"
 
+# mosh into a host and attach its "main" tmux session (mosh survives network drops, tmux survives mosh).
+# remote-ip=remote: mosh can't resolve Tailscale MagicDNS short names itself, so take the IP ssh connected to.
+m() { mosh --experimental-remote-ip=remote "$1" -- tmux new -A -s main; }
+
 # clear dns cache
 alias flush-dns-cache="sudo killall -HUP mDNSResponder"
 

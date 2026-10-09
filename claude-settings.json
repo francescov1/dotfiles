@@ -214,5 +214,6 @@
   "skipDangerousModePermissionPrompt": true,
   "teammateMode": "in-process",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "switchModelsOnFlag": false
 }

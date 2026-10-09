@@ -51,6 +51,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
     ~/.zprofile: zprofile
+    ~/.zshenv: zshenv
     ~/.zshrc: zshrc
     ~/.config/karabiner/karabiner.json:
       if: '[ `uname` = Darwin ]'
