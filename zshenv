@@ -7,3 +7,6 @@ fi
 
 # rustup appends this to ~/.zshenv; keep it here so the dotfiles link can own the file.
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# User-local installs (moshi-hook, uv, claude); in zshenv so non-interactive ssh/mosh commands see them too.
+export PATH="$HOME/.local/bin:$PATH"
