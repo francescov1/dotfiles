@@ -61,9 +61,22 @@
     ~/.claude/CLAUDE.md:
       path: AGENTS.md
       relink: true
+    # Linux gets a copy instead (see the Moshi step). moshi-hook only accepts
+    # hooks whose command is exactly its own quoted absolute path
+    # ('/home/francesco/.local/bin/moshi-hook' claude-hook); $HOME, ~, bare
+    # names, or guards around it are reported as out of date. That path does
+    # not exist on macOS, so committing it would break every hook there.
     ~/.claude/settings.json:
+      if: '[ `uname` = Darwin ]'
       path: claude-settings.json
       relink: true
+    # systemd units don't read shell rc files and moshi's unit pins a minimal PATH,
+    # where /usr/bin/tmux (Ubuntu's 3.4) can't talk to the Homebrew 3.8 server.
+    # Fixed per-user here; /usr/bin/tmux is shared with the other users on the box.
+    ~/.config/systemd/user/moshi-hook.service.d/path.conf:
+      if: '[ `uname` = Linux ]'
+      path: moshi-hook-path.conf
+      create: true
     ~/.claude/notify-classifier-prompt.txt:
       path: claude-notify-classifier-prompt.txt
       relink: true
@@ -88,6 +101,12 @@
       force: true
 
 - shell:
+    # Edits made to ~/.claude/settings.json on Linux are overwritten here; make them in claude-settings.json.
+    # The daemon only reads pairing at startup, so it restarts after every install.
+    - description: Installing Moshi hooks (Linux)
+      command: test "$(uname)" != Linux || { { [ -x ~/.local/bin/moshi-hook ] || curl -fsSL https://getmoshi.app/install.sh | MOSHI_HOOK_SKIP_FIRST_RUN=1 sh; } && cp --remove-destination claude-settings.json ~/.claude/settings.json && ~/.local/bin/moshi-hook install --target claude,codex && systemctl --user daemon-reload && systemctl --user restart moshi-hook && { ~/.local/bin/moshi-hook status | grep -qE 'status:[[:space:]]+paired' || echo 'Moshi not paired. Run moshi-hook pair --token <token from Moshi app> && moshi-hook service restart'; }; }
+      stderr: true
+      stdout: true
     - description: Installing TPM plugins
       command: tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH ~/.tmux/plugins 2>/dev/null || tmux new-session -d -s _tpm_install; tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH ~/.tmux/plugins && ~/.tmux/plugins/tpm/bin/install_plugins; tmux kill-session -t _tpm_install 2>/dev/null || true
       stderr: true
