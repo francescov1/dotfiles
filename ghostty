@@ -18,3 +18,10 @@ keybind = alt+u=text:\x1bu
 # Copy Ghostty's terminfo to hosts on ssh; without it TERM=xterm-ghostty is unknown remotely and
 # zsh echoes garbled/doubled input and tmux won't attach.
 shell-integration-features = ssh-terminfo
+
+# option+shift+[ / ] -> ESC { / ESC } (M-{ / M-}) for tmux pane resize, held-repeat friendly
+keybind = alt+shift+bracket_left=text:\x1b{
+keybind = alt+shift+bracket_right=text:\x1b}
+# option+shift+- / = -> ESC - / ESC = (M-- / M-=) for vertical tmux pane resize; avoids ESC _ (APC)
+keybind = alt+shift+minus=text:\x1b-
+keybind = alt+shift+equal=text:\x1b=
