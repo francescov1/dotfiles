@@ -6,6 +6,7 @@
 - Do not create files unless absolutely necessary. No READMEs, docs, or config files unless asked.
 - Prefer editing existing files over creating new ones.
 - This codebase uses `bun` only. Do not use `npm`, `pnpm`, `yarn`, or other package managers.
+- In chat replies, write links as bare URLs (`PR #9222 https://github.com/org/repo/pull/9222`), never as markdown `[label](url)` links. Sessions run inside tmux (often over mosh), where a markdown link shows only its label and the URL is lost.
 
 ## Code style and structure
 
