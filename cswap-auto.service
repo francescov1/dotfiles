@@ -1,0 +1,11 @@
+[Unit]
+Description=claude-swap auto-switch
+
+[Service]
+ExecStart=%h/.local/bin/cswap auto
+# Exits with an error until accounts are added (cswap add); keep retrying.
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=default.target

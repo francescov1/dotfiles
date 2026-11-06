@@ -77,6 +77,10 @@
       if: '[ `uname` = Linux ]'
       path: moshi-hook-path.conf
       create: true
+    ~/.config/systemd/user/cswap-auto.service:
+      if: '[ `uname` = Linux ]'
+      path: cswap-auto.service
+      create: true
     ~/.claude/notify-classifier-prompt.txt:
       path: claude-notify-classifier-prompt.txt
       relink: true
@@ -105,6 +109,16 @@
     # The daemon only reads pairing at startup, so it restarts after every install.
     - description: Installing Moshi hooks (Linux)
       command: test "$(uname)" != Linux || { { [ -x ~/.local/bin/moshi-hook ] || curl -fsSL https://getmoshi.app/install.sh | MOSHI_HOOK_SKIP_FIRST_RUN=1 sh; } && cp --remove-destination claude-settings.json ~/.claude/settings.json && ~/.local/bin/moshi-hook install --target claude,codex && systemctl --user daemon-reload && systemctl --user restart moshi-hook && { ~/.local/bin/moshi-hook status | grep -qE 'status:[[:space:]]+paired' || echo 'Moshi not paired. Run moshi-hook pair --token <token from Moshi app> && moshi-hook service restart'; }; }
+      stderr: true
+      stdout: true
+    # --managed-python: Homebrew's framework Python can't draw the menu bar item on macOS 26+.
+    # Auto-switch runs inside the menu bar on macOS; the settings file is only seeded once so a toggle-off sticks.
+    - description: Installing claude-swap (macOS menu bar, auto-switch on)
+      command: test "$(uname)" != Darwin || { uv tool install --managed-python 'claude-swap[menubar]' && mkdir -p ~/.claude-swap-backup && { [ -f ~/.claude-swap-backup/menubar_settings.json ] || echo '{"auto_switch_enabled":true}' > ~/.claude-swap-backup/menubar_settings.json; } && ~/.local/bin/cswap menubar --install-service; }
+      stderr: true
+      stdout: true
+    - description: Installing claude-swap (Linux auto-switch service)
+      command: test "$(uname)" != Linux || { uv tool install --managed-python claude-swap && systemctl --user daemon-reload && systemctl --user enable --now cswap-auto; }
       stderr: true
       stdout: true
     - description: Installing TPM plugins
