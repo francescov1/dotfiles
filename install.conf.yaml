@@ -81,6 +81,10 @@
       if: '[ `uname` = Linux ]'
       path: cswap-auto.service
       create: true
+    ~/.local/bin/cswap-auto:
+      if: '[ `uname` = Linux ]'
+      path: cswap-auto
+      create: true
     ~/.claude/notify-classifier-prompt.txt:
       path: claude-notify-classifier-prompt.txt
       relink: true

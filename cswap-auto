@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# cswap auto-switch for Linux (systemd: cswap-auto.service), plus a wake-up for the OR fleet tmux session.
+# Switches at 80% of the 5h window / 85% of the weekly window, and falls back to managed API-key (credit) accounts once
+# every subscription account is exhausted; cswap takes API-key accounts in slot order (`cswap move` / `cswap disable`).
+# A Claude Code session that hit the usage limit sits on its "Stop and wait for limit to reset" menu even after cswap
+# switches accounts, so whenever the active account has headroom, any fleet pane showing that menu gets one Escape.
+set -euo pipefail
+
+fleet_session=openrouter-autoscaler
+
+wake_stuck_panes() {
+  tmux has-session -t "$fleet_session" 2>/dev/null || return 0
+  tmux list-panes -s -t "$fleet_session" -F '#{pane_id} #{pane_in_mode}' | while read -r pane in_mode; do
+    # A pane in copy mode would swallow the key and stay locked.
+    [ "$in_mode" = 0 ] || continue
+    tmux capture-pane -p -t "$pane" | tail -20 | grep -q 'Stop and wait for limit to reset' || continue
+    tmux send-keys -t "$pane" Escape
+    echo "woke $pane: dismissed the usage-limit menu"
+  done
+}
+
+cswap auto --json --threshold 80 --weekly-threshold 85 --include-api-key-accounts | while read -r line; do
+  printf '%s\n' "$line"
+  case "$(jq -r '.event' <<<"$line")" in
+    switch) sleep 5; wake_stuck_panes ;;
+    poll)
+      headroom=$(jq -r '.headroomPct[(.active.number | tostring)] // 0' <<<"$line")
+      if awk -v h="$headroom" 'BEGIN { exit !(h >= 5) }'; then wake_stuck_panes; fi
+      ;;
+  esac
+done
