@@ -154,7 +154,8 @@ source "$HOMEBREW_PREFIX/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighti
 source "$HOMEBREW_PREFIX/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # TODO: Figure out how to set option tab as the key binding
 #bindkey '\e\t' autosuggest-accept # accept autosuggestion with option-tab
-eval "$(scmpuff init -s)"
+# Agent shells (Claude Code snapshots) keep the git wrapper but drop SCMPUFF_GIT_CMD, so git fails there.
+[[ -z $CLAUDECODE ]] && eval "$(scmpuff init -s)"
 
 
 #. "$HOME/.local/bin/env"
