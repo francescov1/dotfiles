@@ -32,7 +32,6 @@ if OS.mac?
   brew "docker"
   brew "docker-compose"
 
-  cask "1password"
   cask "brave-browser"
   cask "chatgpt"
   cask "claude"
