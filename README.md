@@ -1,5 +1,7 @@
 # Setup on new machine
 
+First give your terminal App Management permission (System Settings → Privacy & Security → App Management), or cask installs like 1Password fail with `Operation not permitted`. Re-run `./install` after enabling it if you forgot.
+
 ```bash
 git clone https://github.com/francescov1/dotfiles.git
 cd dotfiles

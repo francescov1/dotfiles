@@ -1,3 +1,8 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
 - clean: ["~"]
 
 - shell:
@@ -64,9 +69,7 @@
       path: karabiner.json
       force: true
     ~/.aliases: aliases
-    ~/.claude/CLAUDE.md:
-      path: AGENTS.md
-      relink: true
+    ~/.claude/CLAUDE.md: AGENTS.md
     # Linux gets a copy instead (see the Moshi step). moshi-hook only accepts
     # hooks whose command is exactly its own quoted absolute path
     # ('/home/francesco/.local/bin/moshi-hook' claude-hook); $HOME, ~, bare
@@ -75,36 +78,24 @@
     ~/.claude/settings.json:
       if: '[ `uname` = Darwin ]'
       path: claude-settings.json
-      relink: true
     # systemd units don't read shell rc files and moshi's unit pins a minimal PATH,
     # where /usr/bin/tmux (Ubuntu's 3.4) can't talk to the Homebrew 3.8 server.
     # Fixed per-user here; /usr/bin/tmux is shared with the other users on the box.
     ~/.config/systemd/user/moshi-hook.service.d/path.conf:
       if: '[ `uname` = Linux ]'
       path: moshi-hook-path.conf
-      create: true
     ~/.config/systemd/user/cswap-auto.service:
       if: '[ `uname` = Linux ]'
       path: cswap-auto.service
-      create: true
     ~/.local/bin/cswap-auto:
       if: '[ `uname` = Linux ]'
       path: cswap-auto
-      create: true
-    ~/.claude/notify-classifier-prompt.txt:
-      path: claude-notify-classifier-prompt.txt
-      relink: true
-    ~/.codex/AGENTS.md:
-      path: AGENTS.md
-      relink: true
-    ~/.config/opencode/AGENTS.md:
-      path: AGENTS.md
-      relink: true
-      create: true
+    ~/.claude/notify-classifier-prompt.txt: claude-notify-classifier-prompt.txt
+    ~/.codex/AGENTS.md: AGENTS.md
+    ~/.config/opencode/AGENTS.md: AGENTS.md
     ~/.config/slate/slate.json:
       if: '[ `uname` = Darwin ]'
       path: slate.json
-      relink: true
     "~/Library/Application Support/Cursor/User/keybindings.json":
       if: '[ `uname` = Darwin ]'
       path: keybindings.json
