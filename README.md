@@ -2,7 +2,7 @@
 
 Install 1Password by hand first (https://1password.com/downloads/mac); it isn't in the Brewfile because `brew bundle` can't adopt a hand-installed copy.
 
-First give your terminal App Management permission (System Settings → Privacy & Security → App Management), or cask installs like 1Password fail with `Operation not permitted`. Re-run `./install` after enabling it if you forgot.
+Give your terminal App Management permission (System Settings → Privacy & Security → App Management), then quit and reopen it, or cask installs over existing apps fail with `Operation not permitted`.
 
 ```bash
 git clone https://github.com/francescov1/dotfiles.git
