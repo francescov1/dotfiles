@@ -10,6 +10,8 @@ cd dotfiles
 ./install
 ```
 
+On Rectangle's first launch click **Apply** on the config prompt, then pick **Recommended** in the welcome window; that choice matches `RectangleConfig.json` (the welcome window overwrites those two settings).
+
 Packages and apps live in `Brewfile`. `brew bundle cleanup --file=Brewfile` lists anything installed that isn't in it.
 
 More info here: https://github.com/anishathalye/dotbot
