@@ -50,8 +50,9 @@
         defaults write com.apple.finder FXPreferredViewStyle -string clmv &&
         killall Dock Finder; }
     # Rectangle imports this file on launch and then renames it, so it is copied rather than linked.
+    # Skipped once Rectangle has its own prefs so a re-run never reverts changes made in its UI.
     - description: Seeding Rectangle config
-      command: test "$(uname)" != Darwin || { mkdir -p ~/Library/Application\ Support/Rectangle && cp RectangleConfig.json ~/Library/Application\ Support/Rectangle/; }
+      command: test "$(uname)" != Darwin || defaults read com.knollsoft.Rectangle >/dev/null 2>&1 || { mkdir -p ~/Library/Application\ Support/Rectangle && cp RectangleConfig.json ~/Library/Application\ Support/Rectangle/; }
     - description: Installing TPM (Tmux Plugin Manager)
       command: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || (cd ~/.tmux/plugins/tpm && git pull)
       stderr: true
