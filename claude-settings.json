@@ -202,6 +202,7 @@
     }
   },
   "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "high"
@@ -211,9 +212,8 @@
     }
   },
   "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true,
+  "switchModelsOnFlag": false,
   "teammateMode": "in-process",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "switchModelsOnFlag": false
+  "agentPushNotifEnabled": true
 }
