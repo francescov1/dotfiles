@@ -6,6 +6,6 @@ cd dotfiles
 ./install
 ```
 
-Then import `custom-profile.itermkeymap` into iTerm2 (Settings -> Profiles -> Keys -> Key Mappings -> Presets -> Import)
+Packages and apps live in `Brewfile`. `brew bundle cleanup --file=Brewfile` lists anything installed that isn't in it.
 
 More info here: https://github.com/anishathalye/dotbot
