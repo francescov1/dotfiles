@@ -5,6 +5,54 @@
 
 - clean: ["~"]
 
+- link:
+    ~/.gitconfig: gitconfig
+    ~/.tmux.conf: tmux.conf
+    ~/.vimrc: vimrc
+    ~/.zprofile: zprofile
+    ~/.zshenv: zshenv
+    ~/.zshrc: zshrc
+    ~/.config/karabiner/karabiner.json:
+      if: '[ `uname` = Darwin ]'
+      path: karabiner.json
+      force: true
+    ~/.aliases: aliases
+    ~/.claude/CLAUDE.md: AGENTS.md
+    # Linux gets a copy instead (see the Moshi step). moshi-hook only accepts
+    # hooks whose command is exactly its own quoted absolute path
+    # ('/home/francesco/.local/bin/moshi-hook' claude-hook); $HOME, ~, bare
+    # names, or guards around it are reported as out of date. That path does
+    # not exist on macOS, so committing it would break every hook there.
+    ~/.claude/settings.json:
+      if: '[ `uname` = Darwin ]'
+      path: claude-settings.json
+    # systemd units don't read shell rc files and moshi's unit pins a minimal PATH,
+    # where /usr/bin/tmux (Ubuntu's 3.4) can't talk to the Homebrew 3.8 server.
+    # Fixed per-user here; /usr/bin/tmux is shared with the other users on the box.
+    ~/.config/systemd/user/moshi-hook.service.d/path.conf:
+      if: '[ `uname` = Linux ]'
+      path: moshi-hook-path.conf
+    ~/.config/systemd/user/cswap-auto.service:
+      if: '[ `uname` = Linux ]'
+      path: cswap-auto.service
+    ~/.local/bin/cswap-auto:
+      if: '[ `uname` = Linux ]'
+      path: cswap-auto
+    ~/.claude/notify-classifier-prompt.txt: claude-notify-classifier-prompt.txt
+    ~/.codex/AGENTS.md: AGENTS.md
+    ~/.config/opencode/AGENTS.md: AGENTS.md
+    ~/.config/slate/slate.json:
+      if: '[ `uname` = Darwin ]'
+      path: slate.json
+    "~/Library/Application Support/Cursor/User/keybindings.json":
+      if: '[ `uname` = Darwin ]'
+      path: keybindings.json
+      force: true
+    "~/Library/Application Support/com.mitchellh.ghostty/config":
+      if: '[ `uname` = Darwin ]'
+      path: ghostty
+      force: true
+
 - shell:
     - description: Installing Homebrew
       command: command -v brew >/dev/null || { [ "$(uname)" = Darwin ] || export NONINTERACTIVE=1; /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; }
@@ -57,54 +105,6 @@
       command: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || (cd ~/.tmux/plugins/tpm && git pull)
       stderr: true
       stdout: true
-
-- link:
-    ~/.gitconfig: gitconfig
-    ~/.tmux.conf: tmux.conf
-    ~/.vimrc: vimrc
-    ~/.zprofile: zprofile
-    ~/.zshenv: zshenv
-    ~/.zshrc: zshrc
-    ~/.config/karabiner/karabiner.json:
-      if: '[ `uname` = Darwin ]'
-      path: karabiner.json
-      force: true
-    ~/.aliases: aliases
-    ~/.claude/CLAUDE.md: AGENTS.md
-    # Linux gets a copy instead (see the Moshi step). moshi-hook only accepts
-    # hooks whose command is exactly its own quoted absolute path
-    # ('/home/francesco/.local/bin/moshi-hook' claude-hook); $HOME, ~, bare
-    # names, or guards around it are reported as out of date. That path does
-    # not exist on macOS, so committing it would break every hook there.
-    ~/.claude/settings.json:
-      if: '[ `uname` = Darwin ]'
-      path: claude-settings.json
-    # systemd units don't read shell rc files and moshi's unit pins a minimal PATH,
-    # where /usr/bin/tmux (Ubuntu's 3.4) can't talk to the Homebrew 3.8 server.
-    # Fixed per-user here; /usr/bin/tmux is shared with the other users on the box.
-    ~/.config/systemd/user/moshi-hook.service.d/path.conf:
-      if: '[ `uname` = Linux ]'
-      path: moshi-hook-path.conf
-    ~/.config/systemd/user/cswap-auto.service:
-      if: '[ `uname` = Linux ]'
-      path: cswap-auto.service
-    ~/.local/bin/cswap-auto:
-      if: '[ `uname` = Linux ]'
-      path: cswap-auto
-    ~/.claude/notify-classifier-prompt.txt: claude-notify-classifier-prompt.txt
-    ~/.codex/AGENTS.md: AGENTS.md
-    ~/.config/opencode/AGENTS.md: AGENTS.md
-    ~/.config/slate/slate.json:
-      if: '[ `uname` = Darwin ]'
-      path: slate.json
-    "~/Library/Application Support/Cursor/User/keybindings.json":
-      if: '[ `uname` = Darwin ]'
-      path: keybindings.json
-      force: true
-    "~/Library/Application Support/com.mitchellh.ghostty/config":
-      if: '[ `uname` = Darwin ]'
-      path: ghostty
-      force: true
 
 - shell:
     # Edits made to ~/.claude/settings.json on Linux are overwritten here; make them in claude-settings.json.
