@@ -20,7 +20,7 @@
       stdout: true
       stdin: true
     - description: Installing Homebrew casks
-      command: test "$(uname)" != Darwin || HOMEBREW_NO_INSTALL_UPGRADE=1 brew install --cask raycast karabiner-elements keepingyouawake cursor rectangle contexts brave-browser lulu ghostty ngrok claude-code codex || true
+      command: test "$(uname)" != Darwin || HOMEBREW_NO_INSTALL_UPGRADE=1 brew install --cask raycast karabiner-elements keepingyouawake cursor rectangle contexts brave-browser lulu ghostty ngrok claude-code codex slack || true
       stderr: true
       stdout: true
       stdin: true
