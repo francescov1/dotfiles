@@ -23,7 +23,7 @@ brew "asdf"
 brew "postgresql@16"
 brew "helm"
 brew "helmfile"
-brew "derailed/k9s/k9s", trusted: true
+brew "k9s"
 brew "hashicorp/tap/terraform", trusted: true
 
 if OS.mac?
