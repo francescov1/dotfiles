@@ -18,34 +18,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
       }
     ],
     "PreToolUse": [
@@ -54,14 +26,6 @@
           {
             "type": "command",
             "command": "{ sid=$(jq -r \".session_id // empty\"); [ -n \"$sid\" ] && rm -f \"$HOME\"/.claude/state/waiting/\"$sid\"; [ -n \"$TMUX_PANE\" ] && /opt/homebrew/bin/tmux set -pu -t \"$TMUX_PANE\" window-style; } 2>/dev/null; true"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -74,14 +38,6 @@
             "command": "{ sid=$(jq -r \".session_id // empty\"); [ -n \"$sid\" ] && rm -f \"$HOME\"/.claude/state/waiting/\"$sid\"; [ -n \"$TMUX_PANE\" ] && /opt/homebrew/bin/tmux set -pu -t \"$TMUX_PANE\" window-style; } 2>/dev/null; true"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
       }
     ],
     "SessionStart": [
@@ -90,14 +46,6 @@
           {
             "type": "command",
             "command": "{ sid=$(jq -r \".session_id // empty\"); [ -n \"$sid\" ] && rm -f \"$HOME\"/.claude/state/waiting/\"$sid\"; [ -n \"$TMUX_PANE\" ] && /opt/homebrew/bin/tmux set -pu -t \"$TMUX_PANE\" window-style; } 2>/dev/null; true"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
           }
         ]
       }
@@ -112,24 +60,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
-      }
-    ],
-    "StopFailure": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
       }
     ],
     "UserPromptSubmit": [
@@ -140,14 +70,6 @@
             "command": "{ sid=$(jq -r \".session_id // empty\"); [ -n \"$sid\" ] && rm -f \"$HOME\"/.claude/state/waiting/\"$sid\"; [ -n \"$TMUX_PANE\" ] && /opt/homebrew/bin/tmux set -pu -t \"$TMUX_PANE\" window-style; } 2>/dev/null; true"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.office-bin/office.sh hook claude-code"
-          }
-        ]
       }
     ]
   },
@@ -156,7 +78,6 @@
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "compound-engineering@every-marketplace": true,
-    "fable-advisor@fable-advisor": true,
     "feature-dev@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "github@claude-plugins-official": true,
@@ -182,12 +103,6 @@
         "repo": "anthropics/skills"
       }
     },
-    "fable-advisor": {
-      "source": {
-        "source": "github",
-        "repo": "context-labs/fable-advisor"
-      }
-    },
     "i-have-adhd": {
       "source": {
         "source": "github",
@@ -202,7 +117,6 @@
     }
   },
   "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true,
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "high"
@@ -212,8 +126,10 @@
     }
   },
   "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
   "switchModelsOnFlag": false,
   "teammateMode": "in-process",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "theme": "dark"
 }

@@ -169,29 +169,6 @@ s() {
 # cocoapods
 alias clean-pods='rm -rf "${HOME}/Library/Caches/CocoaPods" && rm -rf "`pwd`/Pods/"'
 
-# This function connects to telepresence, checks if a k8s service is accessible, and reconnects if not.
-# This seems to be often needed when using the tailscale VPN.
-function telepresence_connect_retry {
-    # Attempt to connect using telepresence
-    telepresence connect
-
-    # Try to access your Kubernetes service
-    curl -s --fail "http://backend-service.default.svc.cluster.local" >/dev/null
-
-    # Check the exit status of the curl command
-    if [ "$?" != "0" ]; then
-        echo "Service is not accessible, retrying connection..."
-        # Disconnect if the service is not accessible
-        telepresence quit
-
-        # Reattempt the connection
-        telepresence connect
-    fi
-}
-
-
-# Kubernetes telepresence connect. Tunnels local traffic to k8s cluster for local development. 
-# Only runs on staging to ensure we don't mess with the production cluster
 
 # ripgrep with ignore patterns
 function rp {
